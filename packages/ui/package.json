@@ -5,6 +5,7 @@
   "exports": {
     "./*": "./src/components/ui/*.tsx",
     "./auth/*": "./src/components/auth/*.tsx",
+    "./icons": "./src/components/icons/index.tsx",
     "./globals.css": "./src/globals.css",
     "./utils": "./lib/utils.ts",
     "./tailwind.config": "./tailwind.config.ts"

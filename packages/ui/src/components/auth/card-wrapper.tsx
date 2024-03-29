@@ -1,15 +1,15 @@
 "use client";
 
 import { ReactNode } from "react";
-import { Social } from "./social";
 import { CardFooter } from "../ui/card";
 
 interface CardWrapperProps {
   children: ReactNode;
   headerText: string;
-  headerWarning: string;
+  headerWarning?: string;
   footerText: string;
   footerHref: string;
+  socialButtons?: ReactNode;
 }
 
 export const CardWrapper = ({
@@ -18,6 +18,7 @@ export const CardWrapper = ({
   headerWarning,
   footerText,
   footerHref,
+  socialButtons,
 }: CardWrapperProps) => {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center overflow-hidden ">
@@ -34,12 +35,10 @@ export const CardWrapper = ({
                 {children}
               </div>
 
-              <div>
-                <Social />
-              </div>
+              <div>{socialButtons}</div>
             </div>
           </div>
-          <CardFooter className="pt-2">
+          <CardFooter className="pt-2 flex items-center justify-center">
             <a className="hover:underline" href={footerHref}>
               {footerText}
             </a>
