@@ -1,0 +1,19 @@
+{
+  "name": "@repo/common",
+  "private": true,
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "exports": {
+    "./schema": "./src/index.ts"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "zod": "^3.22.4"
+  }
+}
