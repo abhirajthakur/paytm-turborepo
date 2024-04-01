@@ -1,9 +1,9 @@
 "use client";
 
-import { register } from "@/actions/register";
+import { login } from "@/actions/login";
 import { Social } from "@/app/_social";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RegisterSchema } from "@repo/common/schema";
+import { LoginSchema } from "@repo/common/schema";
 import { CardWrapper } from "@repo/ui/auth/card-wrapper";
 import { FormError } from "@repo/ui/auth/form-error";
 import { FormSuccess } from "@repo/ui/auth/form-success";
@@ -17,65 +17,53 @@ import {
   FormMessage,
 } from "@repo/ui/form";
 import { Input } from "@repo/ui/input";
+import { useSearchParams } from "next/navigation";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 
-export default function SignupPage() {
+export default function SigninPage() {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof RegisterSchema>>({
-    resolver: zodResolver(RegisterSchema),
+  const searchParams = useSearchParams();
+  const urlError =
+    searchParams.get("error") === "OAuthAccountNotLinked"
+      ? "Email already in use with different provider!"
+      : "";
+
+  const form = useForm<z.infer<typeof LoginSchema>>({
+    resolver: zodResolver(LoginSchema),
     defaultValues: {
       email: "",
       password: "",
-      name: "",
     },
   });
 
-  const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
+  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setError("");
     setSuccess("");
 
     startTransition(() => {
-      register(values).then((data) => {
-        setError(data.error);
-        setSuccess(data.success);
+      login(values).then((data) => {
+        setError(data?.error);
+        setSuccess(data?.success);
       });
     });
   };
 
   return (
     <CardWrapper
-      headerText="Register"
-      headerWarning="Create your account"
-      footerText="Already have an account?"
-      footerHref="/signin"
+      headerText="Login"
+      headerWarning="Access your account"
+      footerText="Don't have an account?"
+      footerHref="/auth/signup"
       socialButtons={<Social />}
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-2">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="John Doe"
-                      disabled={isPending}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
             <FormField
               control={form.control}
               name="email"
@@ -114,11 +102,12 @@ export default function SignupPage() {
               )}
             />
           </div>
-          <FormError message={error} />
+          <FormError message={error || urlError} />
           <FormSuccess message={success} />
 
+          {/* https://www.youtube.com/watch?v=1MTyCvS05V4 */}
           <Button className="w-full" type="submit">
-            Sign Up
+            Sign In
           </Button>
         </form>
       </Form>

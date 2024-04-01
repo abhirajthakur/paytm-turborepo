@@ -15,10 +15,11 @@
     }
   },
   "globalEnv": [
-    "./apps/client/.env",
     "GOOGLE_CLIENT_ID",
     "GOOGLE_CLIENT_SECRET",
     "GITHUB_CLIENT_ID",
-    "GITHUB_CLIENT_SECRET"
+    "GITHUB_CLIENT_SECRET",
+    "RESEND_API_KEY",
+    "MAILERSEND_API_KEY"
   ]
 }

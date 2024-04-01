@@ -6,14 +6,17 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
   "exports": {
-    "./schema": "./src/index.ts"
+    "./schema": "./src/index.ts",
+    "./token": "./src/token.ts"
   },
   "devDependencies": {
+    "@types/uuid": "^9.0.8",
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@repo/database": "workspace:*",
+    "uuid": "^9.0.1",
     "zod": "^3.22.4"
   }
 }

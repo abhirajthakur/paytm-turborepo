@@ -10,6 +10,23 @@ export const {
   signOut,
 } = NextAuth({
   callbacks: {
+    async signIn({ user, account }) {
+      // Allow OAuth without email verification
+      if (account?.provider !== "credentials") {
+        return true;
+      }
+
+      const existingUser = await prisma.user.findUnique({
+        where: { id: user.id },
+      });
+
+      // Prevent sign in without email verification
+      if (!existingUser?.emailVerified) {
+        return false;
+      }
+
+      return true;
+    },
     async session({ token, session }) {
       if (token.sub && session.user) {
         session.user.id = token.sub;
@@ -29,8 +46,8 @@ export const {
     },
   },
   pages: {
-    signIn: "/signin",
-    error: "/error",
+    signIn: "/auth/signin",
+    error: "/auth/error",
   },
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
