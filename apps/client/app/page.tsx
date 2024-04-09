@@ -10,12 +10,15 @@ export default function Page() {
 
   return (
     <>
-      <div className="bg-gray-50 py-12 lg:py-16">
+      <div
+        className="bg-gray-50 py-12 lg:py-16 dark:bg-gray-800"
+        data-theme="light"
+      >
         <div className="container grid items-center gap-4 px-4 md:px-6">
           <div className="grid gap-2">
             <div className="flex items-start justify-between">
               <div>
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
+                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-gray-900 dark:text-gray-50">
                   Pay with Ease
                 </h1>
 
@@ -30,7 +33,8 @@ export default function Page() {
                 <Button
                   size="lg"
                   variant="custom"
-                  onClick={() => router.push("/signin")}
+                  onClick={() => router.push("/auth/signin")}
+                  className="bg-gray-900 text-white hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-900 dark:hover:text-gray-50"
                 >
                   Login
                 </Button>
@@ -48,10 +52,10 @@ export default function Page() {
         </div>
       </div>
 
-      <section className="py-12 lg:py-16">
+      <section className="py-12 lg:py-16 dark:bg-gray-900" data-theme="light">
         <div className="container grid items-center gap-12 px-4 md:px-6">
           <div className="space-y-2 text-center">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-gray-900 dark:text-gray-50">
               Secure Payments. Easy Transfers. Anywhere.
             </h2>
             <p className="max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed mx-auto dark:text-gray-400">
@@ -67,7 +71,9 @@ export default function Page() {
                 src="/fast-transactions.png"
                 width={150}
               />
-              <h3 className="text-xl font-bold">Fast Transactions</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-50">
+                Fast Transactions
+              </h3>
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 Your payments are processed quickly, so you can get back to what
                 matters.
@@ -81,7 +87,9 @@ export default function Page() {
                 src="/low-fees.png"
                 width={150}
               />
-              <h3 className="text-xl font-bold">Low Fees</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-50">
+                Low Fees
+              </h3>
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 We believe in keeping your costs down, so you can keep more of
                 your money.
@@ -95,7 +103,9 @@ export default function Page() {
                 src="/customer-support.png"
                 width={150}
               />
-              <h3 className="text-xl font-bold">24/7 Customer Support</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-50">
+                24/7 Customer Support
+              </h3>
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 Need help? Our team is always here to assist you, day or night.
               </p>
@@ -104,7 +114,10 @@ export default function Page() {
         </div>
       </section>
 
-      <div className="bg-gray-50 py-12 lg:py-16">
+      <div
+        className="bg-gray-50 py-12 lg:py-16 dark:bg-gray-800"
+        data-theme="light"
+      >
         <div className="container grid items-center gap-4 px-4 md:px-6">
           <div className="space-y-2 text-center">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
@@ -116,15 +129,18 @@ export default function Page() {
           </div>
           <div className="flex flex-col gap-2 min-[400px]:flex-row justify-center">
             <Button
-              className="inline-flex h-10 items-center justify-center rounded-md bg-gray-50 px-8 text-sm font-medium text-gray-900 shadow transition-colors hover:bg-gray-100 hover:text-gray-950 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300"
-              onClick={() => router.push("/signup")}
+              className="inline-flex h-10 items-center justify-center rounded-md bg-gray-50 px-8 text-sm font-medium text-gray-900 shadow transition-colors hover:bg-gray-100 hover:text-gray-950 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-900 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300"
+              onClick={() => router.push("/auth/signup")}
             >
               Create an Account
             </Button>
           </div>
         </div>
       </div>
-      <footer className="bg-white py-12 lg:py-16">
+      <footer
+        className="bg-white py-12 lg:py-16 dark:bg-gray-900"
+        data-theme="light"
+      >
         <div className="container grid items-center gap-4 px-4 md:px-6">
           <div className="flex items-center gap-4">
             <nav className="flex items-center gap-4">

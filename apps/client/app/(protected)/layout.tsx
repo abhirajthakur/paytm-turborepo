@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
-import { Navbar } from "./_components/navbar";
+import { Navbar } from "./_components/Navbar";
 
 export const metadata: Metadata = {
   title: "Dashboard",

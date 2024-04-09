@@ -1,7 +1,7 @@
 "use client";
 
 import { register } from "@/actions/register";
-import { Social } from "@/app/_social";
+import { Socials } from "@/app/(protected)/_components/Socials";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterSchema } from "@repo/common/schema";
 import { CardWrapper } from "@repo/ui/auth/card-wrapper";
@@ -53,7 +53,7 @@ export default function SignupPage() {
       headerWarning="Create your account"
       footerText="Already have an account?"
       footerHref="/auth/signin"
-      socialButtons={<Social />}
+      socialButtons={<Socials />}
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

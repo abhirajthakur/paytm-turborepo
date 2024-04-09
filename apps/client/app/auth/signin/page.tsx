@@ -1,7 +1,7 @@
 "use client";
 
 import { login } from "@/actions/login";
-import { Social } from "@/app/_social";
+import { Socials } from "@/app/(protected)/_components/Socials";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "@repo/common/schema";
 import { CardWrapper } from "@repo/ui/auth/card-wrapper";
@@ -59,7 +59,7 @@ export default function SigninPage() {
       headerWarning="Access your account"
       footerText="Don't have an account?"
       footerHref="/auth/signup"
-      socialButtons={<Social />}
+      socialButtons={<Socials />}
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -105,7 +105,6 @@ export default function SigninPage() {
           <FormError message={error || urlError} />
           <FormSuccess message={success} />
 
-          {/* https://www.youtube.com/watch?v=1MTyCvS05V4 */}
           <Button className="w-full" type="submit">
             Sign In
           </Button>

@@ -49,6 +49,7 @@ export const {
     signIn: "/auth/signin",
     error: "/auth/error",
   },
+  secret: process.env.AUTH_SECRET,
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
   ...authConfig,
