@@ -17,12 +17,15 @@ export const getOnrampTransactions = async () => {
     });
 
     return {
-      transactions: tsxs.map((tsx) => ({
-        time: tsx.startTime,
-        amount: tsx.amount,
-        status: tsx.status,
-        provider: tsx.provider,
-      })),
+      transactions: tsxs
+        .map((tsx) => ({
+          time: tsx.startTime,
+          amount: tsx.amount,
+          status: tsx.status,
+          provider: tsx.provider,
+        }))
+        .sort((a, b) => b.time.getTime() - a.time.getTime())
+        .slice(0, 5),
     };
   } catch (e) {
     if (e instanceof Error) {

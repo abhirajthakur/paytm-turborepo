@@ -21,6 +21,7 @@ export const getDirectTransfers = async () => {
       },
     },
   });
+
   const toTransfers = toUserTransfers.map((transfer) => ({
     id: transfer.id,
     amount: transfer.amount,
@@ -54,12 +55,15 @@ export const getDirectTransfers = async () => {
     const allTransfers = toTransfers.concat(fromTransfers);
 
     return {
-      transfers: allTransfers.map((transfer) => ({
-        name: transfer.name ?? "",
-        status: transfer.toUserId == userId ? "Received" : "Sent",
-        time: transfer.startTime,
-        amount: transfer.amount,
-      })),
+      transfers: allTransfers
+        .map((transfer) => ({
+          name: transfer.name ?? "",
+          status: transfer.toUserId == userId ? "Received" : "Sent",
+          time: transfer.startTime,
+          amount: transfer.amount,
+        }))
+        .sort((a, b) => b.time.getTime() - a.time.getTime())
+        .slice(0, 5),
     };
   } catch (e) {
     if (e instanceof Error) {

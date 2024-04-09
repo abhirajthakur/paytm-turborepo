@@ -42,7 +42,7 @@ export default function Page() {
                 <Image
                   alt="Logo"
                   className="overflow-hidden rounded-lg"
-                  height={200}
+                  height={150}
                   src="/pay-with-ease.png"
                   width={150}
                 />

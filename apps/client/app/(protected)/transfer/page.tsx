@@ -111,6 +111,14 @@ export default function TransferPage() {
                             {...field}
                             placeholder="Enter amount"
                             disabled={isPending}
+                            onChange={(event) => {
+                              const isNumber = /^\d+$/.test(
+                                (+event.target.value).toString(),
+                              );
+                              if (isNumber) {
+                                field.onChange(event.target.value);
+                              }
+                            }}
                           />
                         </FormControl>
                         <FormMessage />

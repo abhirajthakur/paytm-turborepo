@@ -14,13 +14,17 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  password      String?
-  accounts      Account[]
+  id                String              @id @default(cuid())
+  name              String?
+  email             String?             @unique
+  emailVerified     DateTime?
+  image             String?
+  password          String?
+  accounts          Account[]
+  onRampTransaction OnRampTransaction[]
+  balance           Balance[]
+  sentTransfers     DirectTransfer[]    @relation(name: "ToUserRelation")
+  receiveTransfers  DirectTransfer[]    @relation(name: "FromUserRelation")
 }
 
 model Account {
@@ -42,6 +46,35 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
+model DirectTransfer {
+  id         Int      @id @default(autoincrement())
+  amount     Int
+  startTime  DateTime
+  fromUser   User     @relation(name: "FromUserRelation", fields: [fromUserId], references: [id])
+  fromUserId String
+  toUser     User     @relation(name: "ToUserRelation", fields: [toUserId], references: [id])
+  toUserId   String
+}
+
+model OnRampTransaction {
+  id        Int          @id @default(autoincrement())
+  status    OnRampStatus
+  token     String       @unique
+  provider  String
+  amount    Int
+  startTime DateTime
+  user      User         @relation(fields: [userId], references: [id])
+  userId    String
+}
+
+model Balance {
+  id     String @id @default(cuid())
+  amount Int    @default(0)
+  locked Int    @default(0)
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+}
+
 model VerificationToken {
   id      String   @id @default(cuid())
   email   String
@@ -49,4 +82,10 @@ model VerificationToken {
   expires DateTime
 
   @@unique([email, token])
+}
+
+enum OnRampStatus {
+  Success
+  Failure
+  Processing
 }

@@ -61,7 +61,7 @@ export default async function DashboardPage() {
               <div className="text-gray-500 dark:text-gray-400">{email}</div>
             </div>
             <div className="ml-auto text-2xl font-semibold">
-              ₹ {balance.amount}
+              ₹ {balance.amount ?? 0}
             </div>
           </div>
         </Card>

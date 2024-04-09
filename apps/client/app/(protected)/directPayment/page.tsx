@@ -99,6 +99,14 @@ export default function DirectPaymentPage() {
                           {...field}
                           placeholder="Enter amount"
                           disabled={isPending}
+                          onChange={(event) => {
+                            const isNumber = /^\d+$/.test(
+                              (+event.target.value).toString(),
+                            );
+                            if (isNumber) {
+                              field.onChange(event.target.value);
+                            }
+                          }}
                         />
                       </FormControl>
                       <FormMessage />
@@ -122,7 +130,7 @@ export default function DirectPaymentPage() {
       <div className="space-y-8">
         <Card className="w-full">
           <CardHeader>
-            <CardTitle>Recent Transactions</CardTitle>
+            <CardTitle>Recent Transfers</CardTitle>
           </CardHeader>
           <CardContent>
             {!directTransfers ? (
