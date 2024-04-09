@@ -41,7 +41,15 @@ export const {
     async linkAccount({ user }) {
       await prisma.user.update({
         where: { id: user.id },
-        data: { emailVerified: new Date() },
+        data: {
+          emailVerified: new Date(),
+          balance: {
+            create: {
+              amount: 0,
+              locked: 0,
+            },
+          },
+        },
       });
     },
   },

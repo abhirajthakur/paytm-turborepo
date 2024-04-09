@@ -45,7 +45,6 @@ export default function TransferPage() {
   const [transactions, setTransacions] = useState<
     TransactionProps[] | undefined
   >();
-
   const [balance, setBalance] = useState<BalanceProps>();
 
   const form = useForm<z.infer<typeof TransferSchema>>({
@@ -142,12 +141,10 @@ export default function TransferPage() {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent position="popper">
-                            <SelectItem value="SBI Bank">SBI Bank</SelectItem>
-                            <SelectItem value="HDFC Bank">HDFC Bank</SelectItem>
-                            <SelectItem value="Axis Bank">Axis Bank</SelectItem>
-                            <SelectItem value="ICICI Bank">
-                              ICICI Bank
-                            </SelectItem>
+                            <SelectItem value="sbi">SBI Bank</SelectItem>
+                            <SelectItem value="hdfc">HDFC Bank</SelectItem>
+                            <SelectItem value="axis">Axis Bank</SelectItem>
+                            <SelectItem value="icici">ICICI Bank</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />

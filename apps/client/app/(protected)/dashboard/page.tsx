@@ -22,7 +22,7 @@ const greetingText = (): string => {
 export default async function DashboardPage() {
   const session = await auth();
   const name = session?.user?.name;
-  const email = session?.user?.name;
+  const email = session?.user?.email;
   const balance = await getBalance();
 
   return (
@@ -60,9 +60,11 @@ export default async function DashboardPage() {
               <div className="text-2xl font-bold">{name}</div>
               <div className="text-gray-500 dark:text-gray-400">{email}</div>
             </div>
-            <div className="ml-auto text-2xl font-semibold">
-              ₹ {balance.amount ?? 0}
-            </div>
+            {balance && (
+              <div className="ml-auto text-2xl font-semibold">
+                ₹ {balance.amount ?? 0}
+              </div>
+            )}
           </div>
         </Card>
       </div>

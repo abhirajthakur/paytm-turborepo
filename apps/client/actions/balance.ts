@@ -12,7 +12,7 @@ export const getBalance = async () => {
   }
 
   try {
-    const balance = await prisma.balance.findFirst({
+    const balance = await prisma.balance.findUnique({
       where: { userId: session?.user?.id },
     });
 
