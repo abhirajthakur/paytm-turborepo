@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --max-warnings 0"
+    "lint": "eslint . --max-warnings 0",
+    "postinstall": "cd ../../packages/database && pnpm run db:generate"
   },
   "dependencies": {
     "@auth/core": "^0.28.2",
@@ -29,6 +30,7 @@
     "react-spinners": "^0.13.8",
     "recoil": "^0.7.7",
     "resend": "^3.2.0",
+    "sharp": "^0.33.3",
     "zod": "^3.22.4"
   },
   "devDependencies": {

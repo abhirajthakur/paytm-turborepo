@@ -28,6 +28,7 @@ export default function SigninPage() {
   const [isPending, startTransition] = useTransition();
 
   const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl");
   const urlError =
     searchParams.get("error") === "OAuthAccountNotLinked"
       ? "Email already in use with different provider!"
@@ -46,7 +47,7 @@ export default function SigninPage() {
     setSuccess("");
 
     startTransition(() => {
-      login(values).then((data) => {
+      login(values, callbackUrl).then((data) => {
         setError(data?.error);
         setSuccess(data?.success);
       });
@@ -105,7 +106,7 @@ export default function SigninPage() {
           <FormError message={error || urlError} />
           <FormSuccess message={success} />
 
-          <Button className="w-full" type="submit">
+          <Button className="w-full" type="submit" disabled={isPending}>
             Sign In
           </Button>
         </form>

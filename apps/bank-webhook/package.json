@@ -1,0 +1,21 @@
+{
+  "name": "@repo/bank-webhook",
+  "private": true,
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "pnpm esbuild ./src/index.ts --bundle --platform=node --outfile=dist/index.js",
+    "start": "node dist/index.js",
+    "dev": "pnpm run build && pnpm run start"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/express": "^4.17.21",
+    "esbuild": "^0.20.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@repo/database": "workspace:*",
+    "express": "^4.19.2"
+  }
+}

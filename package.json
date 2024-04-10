@@ -6,7 +6,8 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "generate": "turbo db:generate"
+    "generate": "turbo db:generate",
+    "start-client-app": "cd ./apps/client/ && pnpm run start"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",

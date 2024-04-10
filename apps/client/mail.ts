@@ -2,13 +2,14 @@ import { Resend } from "resend";
 import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const domain = process.env.NEXT_PUBLIC_APP_URL;
 
 // RESEND
 export const sendVerificationEmailResend = async (
   email: string,
   token: string,
 ) => {
-  const confirmLink = `http://localhost:3000/auth/new-verification?token=${token}`;
+  const confirmLink = `${domain}/auth/new-verification?token=${token}`;
 
   await resend.emails.send({
     from: "onboarding@resend.dev",
@@ -24,7 +25,7 @@ const mailerSend = new MailerSend({
 
 // MAILERSEND
 export const sendVerificationEmail = async (email: string, token: string) => {
-  const confirmLink = `http://localhost:3000/auth/new-verification?token=${token}`;
+  const confirmLink = `${domain}/auth/new-verification?token=${token}`;
 
   const sentFrom = new Sender(
     "info@trial-3zxk54vnw0xljy6v.mlsender.net",

@@ -117,7 +117,7 @@ export default function SignupPage() {
           <FormError message={error} />
           <FormSuccess message={success} />
 
-          <Button className="w-full" type="submit">
+          <Button className="w-full" type="submit" disabled={isPending}>
             Sign Up
           </Button>
         </form>
