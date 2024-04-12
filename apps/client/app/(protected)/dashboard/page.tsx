@@ -1,8 +1,11 @@
+"use client";
+
 import { getBalance } from "@/actions/balance";
-import { auth } from "@/auth";
 import { Card } from "@repo/ui/card";
 import moment from "moment";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const greetingText = (): string => {
   const now = moment();
@@ -19,11 +22,17 @@ const greetingText = (): string => {
   }
 };
 
-export default async function DashboardPage() {
-  const session = await auth();
-  const name = session?.user?.name;
-  const email = session?.user?.email;
-  const balance = await getBalance();
+export default function DashboardPage() {
+  const session = useSession();
+  const name = session?.data?.user?.name;
+  const email = session?.data?.user?.email;
+  const [balance, setBalance] = useState<number>();
+
+  useEffect(() => {
+    getBalance().then((data) => {
+      setBalance(data.amount);
+    });
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen p-4 lg:p-6 xl:p-8">
@@ -45,12 +54,12 @@ export default async function DashboardPage() {
         </div>
         <Card className="p-4 md:p-6 lg:p-8">
           <div className="flex items-center gap-4">
-            {session?.user?.image ? (
+            {session?.data?.user?.image ? (
               <Image
                 alt="Avatar"
                 className="rounded-full object-cover aspect-[96/96]"
                 height="96"
-                src={session?.user?.image ?? ""}
+                src={session?.data?.user?.image ?? ""}
                 width="96"
               />
             ) : (
@@ -62,7 +71,7 @@ export default async function DashboardPage() {
             </div>
             {balance && (
               <div className="ml-auto text-2xl font-semibold">
-                ₹ {balance.amount ?? 0}
+                ₹ {balance ?? 0}
               </div>
             )}
           </div>
