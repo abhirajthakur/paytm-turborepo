@@ -1,0 +1,16 @@
+FROM node:21.7.3-alpine3.19
+
+WORKDIR /usr/src/app
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml tsconfig.json turbo.json ./
+
+COPY apps ./apps
+COPY packages ./packages
+
+RUN corepack enable
+RUN pnpm install
+RUN pnpm run generate
+
+RUN pnpm run build
+
+CMD ["pnpm", "run", "start-client-app"]
